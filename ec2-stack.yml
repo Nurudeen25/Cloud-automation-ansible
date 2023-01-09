@@ -150,7 +150,7 @@
         vpc_subnet_id: "{{privsub1id}}"
       register: rmq01_out
 
-    - name: Creating Mysql db01
+    - name: Creating MySql db01
           ec2:
             key_name: vprokey
             region: "{{region}}"
