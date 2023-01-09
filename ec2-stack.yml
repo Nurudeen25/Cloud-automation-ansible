@@ -12,13 +12,13 @@
 
     - name: Create ec2 key
       ec2_key:
-        name: ec2key
+        name: vprokey
         region: "{{region}}"
-      register: ec2key_out
+      register: vprokey_out
 
-    - name: Save private key into file loginkey_ec2.pem
+    - name: Save private key into file loginkey_vpro.pem
       copy:
-        content: "{{ec2key_out.key.private_key}}"
-        dest: "./loginkey_ec2.pem"
+        content: "{{vprokey_out.key.private_key}}"
+        dest: "./loginkey_vpro.pem"
         mode: 0600
-      when: ec2key_out.changed
+      when: vprokey_out.changed
