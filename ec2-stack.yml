@@ -6,3 +6,19 @@
   tasks:
     - name: Import VPC setup variable
       include_vars: vars/vpc-output_vars
+
+    - name: Import ec2 setup variable
+      include_vars: vars/vprostacksetup
+
+    - name: Create ec2 key
+      ec2_key:
+        name: ec2key
+        region: "{{region}}"
+      register: ec2key_out
+
+    - name: Save private key into file loginkey_ec2.pem
+      copy:
+        content: "{{ec2key_out.key.private_key}}"
+        dest: "./loginkey_ec2.pem"
+        mode: 0600
+      when: ec2key_out.changed
