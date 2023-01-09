@@ -16,6 +16,9 @@
         region: "{{region}}"
       register: key_out
 
+    - debug:
+        var: keyout
+
     - name: Save private key into file bastion-key.pem
       copy:
         content: "{{key_out.key.private_key}}"
