@@ -151,25 +151,25 @@
       register: rmq01_out
 
     - name: Creating MySql db01
-          ec2:
-            key_name: vprokey
-            region: "{{region}}"
-            instance_type: t2.micro
-            image: "{{mysql_ami}}"
-            wait: yes
-            wait_timeout: 300
-            instance_tags:
-              Name: "db01"
-              Project: Vprofile
-              Owner: DevOps Team
-            exact_count: 1
-            count_tag:
-              Name: "db01"
-              Project: Vprofile
-              Owner: DevOps Team
-            group_id: "{{ec2stackSG_out.group_id}}"
-            vpc_subnet_id: "{{privsub1id}}"
-          register: db01_out
+      ec2:
+        key_name: vprokey
+        region: "{{region}}"
+        instance_type: t2.micro
+        image: "{{mysql_ami}}"
+        wait: yes
+        wait_timeout: 300
+        instance_tags:
+          Name: "db01"
+          Project: Vprofile
+          Owner: DevOps Team
+        exact_count: 1
+        count_tag:
+          Name: "db01"
+          Project: Vprofile
+          Owner: DevOps Team
+        group_id: "{{ec2stackSG_out.group_id}}"
+        vpc_subnet_id: "{{privsub1id}}"
+      register: db01_out
 
     - debug:
         var: db01_out
