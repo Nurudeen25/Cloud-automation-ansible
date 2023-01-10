@@ -184,9 +184,9 @@
         purge_instance_ids: true
         security_group_ids: "{{ ec2stackELBSG_out.group_id }}"
         subnets:
-          - "{{ PubSub1id }}"
-          - "{{ PubSub2id }}"
-          - "{{ PubSub3id }}"
+          - "{{ pubsub1id }}"
+          - "{{ pubsub2id }}"
+          - "{{ pubsub3id }}"
         listeners:
           - protocol: http # options are http, https, ssl, tcp
             load_balancer_port: 80
