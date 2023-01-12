@@ -3,7 +3,7 @@
   hosts: rmqsrvgrp
   gather_facts: no
   tasks:
-  apt:
+    apt:
       name: apt-transport-https
       state: present
       update_cache: yes
