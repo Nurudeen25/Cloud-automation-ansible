@@ -3,15 +3,15 @@
   hosts: rmqsrvgrp
   gather_facts: no
   tasks:
-    - name: Install Erland Repository Package
+    - name: Install Erlang Repository Package
       apt:
-        deb: https://packages.erland-solutions.com/erland-solutions_1.0_all.deb
+        deb: https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
       tags:
         - package
 
-    - name: Add an Erland Solution public key
+    - name: Add an Erlang Solution public key
       apt_key:
-        url: https://packages.erland-solutions.com/ubuntu/erland_solutions.asc
+        url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
         state: present
       tags:
         - package
