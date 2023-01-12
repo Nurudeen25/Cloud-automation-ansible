@@ -32,11 +32,17 @@
       tags:
         - package
 
-    - apt_repository:
-        repo: deb https://dl.bintray.com/rabbitmq/debian bionic main
-        state: present
-      tags:
-        - package
+#    - apt_repository:
+#        repo: deb https://dl.bintray.com/rabbitmq/debian bionic main
+#        state: present
+#      tags:
+#        - package
+    - shell: echo "deb https://dl.bintray.com/rabbitmq/debian bionic main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
+      register: echoout
+    - debug: msg="the echo was {{ echoout.stdout }}"
+
+    - name: Update apt-get repo and cache
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=86400
 
     - name: Install Rabbit MQ
       apt:
