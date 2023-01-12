@@ -1,3 +1,7 @@
 *.pem
-*.war
 *.sql
+*.war
+<<<<<<< HEAD
+public/img/ignore
+=======
+
