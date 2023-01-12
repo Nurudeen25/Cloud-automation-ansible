@@ -1,7 +1,8 @@
 ---
-# tasks file for rabbitmq setup
-
 - name: Install nessesary package
+  hosts: rmqsrvgrp
+  gather_facts: no
+  tasks:
   apt:
       name: apt-transport-https
       state: present
