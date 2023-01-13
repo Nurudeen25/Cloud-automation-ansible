@@ -40,7 +40,7 @@
 
     - name: Install RabbitMQ public key
       apt_key:
-      url: https://d1.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+        url: https://d1.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
 
     - name: Add Erlang official repo
       apt_repository:
