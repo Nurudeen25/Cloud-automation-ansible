@@ -9,12 +9,12 @@
       tags:
         - package
 
-#    - name: Add an Erlang Solution public Key
-#      apt_key:
-#        url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
-#        state: present
-#      tags:
-#        - package
+    - name: Add an Erlang Solution public Key
+      apt_key:
+        url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+        state: present
+      tags:
+        - package
 
     - name: Install Erlang
       apt:
@@ -32,41 +32,19 @@
       tags:
         - package
 
-    - name: Add RabbitMQ official repo
-      apt_repository:
-        repo: deb https://d1.bintray.com/rabbitmq/debian xenial main
+    - apt_repository:
+        repo: deb https://dl.bintray.com/rabbitmq/debian bionic main
         state: present
-        filename: rabbitmq
+      tags:
+        - package
 
-    - name: Install RabbitMQ public key
-      apt_key:
-        url: https://d1.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
-
-    - name: Add Erlang official repo
-      apt_repository:
-        repo: deb http://binaries.erlang-solutions.com/debian xenial contrib
-
-    - name: Install Erlang public key
-      apt_key:
-        url: http://binaries.erlang-solutions.com/debian/erlang_solutions.asc
-        state: present
-
-    - name: Install RabbitMQ package
+    - name: Install Rabbit MQ
       apt:
-        name: "{{ item }}"
-        update_cache: yes
-        install_recommends: yes
+        name: rabbitmq-server
         state: present
-      with_items:
-        - rabbitmq-server
-
-#    - name: Install Rabbit MQ
-#      apt:
-#        name: rabbitmq-server
-#        state: present
-#        update_cache: yes
-#      tags:
-#        - package
+        update_cache: yes
+      tags:
+        - package
 
 
     - name: Start & Enable RMQ
