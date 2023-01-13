@@ -9,42 +9,30 @@
       tags:
         - package
 
-    - name: Add an Erlang Solution public Key
-      apt_key:
-        url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
-        state: present
-      tags:
-        - package
+    tasks:
+    - name: Import EPEL GPG key
+    rpm_key:
+    key: http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+    state: present
 
-    - name: Install Erlang
-      apt:
-        name: erlang
-        update_cache: yes
-        cache_valid_time: 86400
-        state: present
-      tags:
-        - package
+    - name: Add YUM repo
+    yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: https://dl.fedoraproject.org/pub/epel/$releasever/$basearch/
+    gpgcheck: yes
 
-    - name: Add an Apt signing key, uses whichever key is at the URL
-      apt_key:
-        url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
-        state: present
-      tags:
-        - package
+    - name: Update the software package repository
+    yum:
+    name: ‘*’
+    update_cache: yes
 
-    - apt_repository:
-        repo: deb https://dl.bintray.com/rabbitmq/debian bionic main
-        state: present
-      tags:
-        - package
-
-    - name: Install Rabbit MQ
-      apt:
-        name: rabbitmq-server
-        state: present
-        update_cache: yes
-      tags:
-        - package
+    - name: Install RabbitMQ server
+    package:
+    name: “{{ item }}”
+    state: latest
+    with_items:
+    - rabbitmq-server
 
 
     - name: Start & Enable RMQ
